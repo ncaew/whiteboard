@@ -13,11 +13,8 @@ import android.view.View;
  * status bar and navigation/system bar) with user interaction.
  */
 public class FullscreenActivity extends AppCompatActivity {
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
-    private static final boolean AUTO_HIDE = true;
+    private String TAG = "Whiteboard";
+    private static final boolean AUTO_HIDE = false;
 
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -91,7 +88,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.imageView_fullscreen_background);
+        mContentView = findViewById(R.id.constraintLayout_center);
 
 
         // Set up the user interaction to manually show or hide the system UI.
@@ -122,7 +119,8 @@ public class FullscreenActivity extends AppCompatActivity {
         if (mVisible) {
             hide();
         } else {
-            show();
+            //show();
+            hide();
         }
     }
 
