@@ -1,12 +1,21 @@
 package com.chosen.whiteboard;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.app.SearchManager;
+import android.content.ContentUris;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.AlarmClock;
+import android.provider.CalendarContract;
+import android.provider.MediaStore;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -14,6 +23,13 @@ import android.view.View;
  */
 public class FullscreenActivity extends AppCompatActivity {
     private String TAG = "Whiteboard";
+
+    ImageView ivBtn1;
+    ImageView ivBtn2;
+    ImageView ivBtn3;
+    ImageView ivBtn4;
+    ImageView ivBtn5;
+
     private static final boolean AUTO_HIDE = false;
 
     /**
@@ -90,7 +106,6 @@ public class FullscreenActivity extends AppCompatActivity {
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.constraintLayout_center);
 
-
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +118,17 @@ public class FullscreenActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+
+        ivBtn1 = findViewById(R.id.imageView1);
+        ivBtn2 = findViewById(R.id.imageView2);
+        ivBtn3 = findViewById(R.id.imageView3);
+        ivBtn4 = findViewById(R.id.imageView4);
+        ivBtn5 = findViewById(R.id.imageView5);
+        ivBtn1.setOnClickListener(listenerImageViewBtnX);
+        ivBtn2.setOnClickListener(listenerImageViewBtnX);
+        ivBtn3.setOnClickListener(listenerImageViewBtnX);
+        ivBtn4.setOnClickListener(listenerImageViewBtnX);
+        ivBtn5.setOnClickListener(listenerImageViewBtnX);
     }
 
     @Override
@@ -158,4 +184,42 @@ public class FullscreenActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+
+    View.OnClickListener listenerImageViewBtnX = new View.OnClickListener() {
+        @Override
+        public void  onClick(View v) {
+            Log.d(TAG, "listenerImageViewBtnX: ");
+            if (v == ivBtn1) {
+                Log.d(TAG, "onClick: 1");
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_WEB_SEARCH);
+                intent.putExtra(SearchManager.QUERY,"搜索内容");
+                startActivity(intent);
+            } else if ( v == ivBtn2) {
+                Log.d(TAG, "onClick: ");
+                Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            }else if ( v == ivBtn3) {
+                Log.d(TAG, "onClick: ");
+                long startMillis = System.currentTimeMillis();
+                Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+                builder.appendPath("time");
+                ContentUris.appendId(builder, startMillis);
+                Intent intent = new Intent(Intent.ACTION_VIEW).setData(builder.build());
+            }else if ( v == ivBtn4) {
+                Log.d(TAG, "onClick: ");
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(MediaStore.Images.Media.INTERNAL_CONTENT_URI.toString()));
+            }else if ( v == ivBtn5) {
+                Log.d(TAG, "onClick: ");
+                Intent intent=new Intent();
+                intent.setClassName("com.estrongs.android.pop", "com.estrongs.android.pop.app.openscreenad.NewSplashActivity");
+                startActivity(intent);
+            } else {
+                Log.d(TAG, "listenerImageViewBtnX: Should never goes here!");
+            }
+        }
+    };
+
+
+
 }

@@ -9,11 +9,26 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        setProperty("archivesBaseName", "${applicationId}-$versionName-$versionCode")
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def newName
+            if ('debug' == variant.variantData.variantConfiguration.buildType.name) {
+                newName = "${archivesBaseName}d.apk"
+            } else {
+                newName = "${archivesBaseName}r.apk"
+            }
+            outputFileName = newName
         }
     }
 }
