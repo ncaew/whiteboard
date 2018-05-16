@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.chosen.whiteboard">
+    package="com.chosen.whiteboard" >
+    <!--android:sharedUserId="android.uid.system"-->
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!--uses-permission android:name="android.permission.INJECT_EVENTS" /-->
 
     <application
         android:allowBackup="true"
@@ -19,7 +24,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <service android:name=".FloatWindowService">Chosen</service>
     </application>
 
 </manifest>

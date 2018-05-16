@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
@@ -139,6 +138,9 @@ public class FullscreenActivity extends AppCompatActivity {
         // created, to briefly hint to the user that UI controls
         // are available.
         delayedHide(100);
+        //
+        Intent intent = new Intent(FullscreenActivity.this, FloatWindowService.class);
+        startService(intent);
     }
 
     private void toggle() {
@@ -197,8 +199,7 @@ public class FullscreenActivity extends AppCompatActivity {
                 startActivity(intent);
             } else if ( v == ivBtn2) {
                 Log.d(TAG, "onClick: ");
-                Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
             }else if ( v == ivBtn3) {
                 Log.d(TAG, "onClick: ");
                 long startMillis = System.currentTimeMillis();
