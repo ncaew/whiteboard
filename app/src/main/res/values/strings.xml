@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">whiteboard</string>
+    <item type="id" name="TAG_ID_pkgName"/>
+    <item type="id" name="TAG_ID_className"/>
 
     <string name="dummy_button">Bottom Button</string>
     <string name="dummy_content">Center CONTENT</string>
+
+    <string name="TextView">TextView</string>
+    <string name="TextView1">白板</string>
+    <string name="TextView2">会议</string>
+    <string name="TextView3">文件</string>
+    <string name="TextView4">设置</string>
+    <string name="TextView5">更多</string>
 </resources>

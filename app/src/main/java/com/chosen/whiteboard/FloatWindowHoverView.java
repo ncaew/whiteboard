@@ -73,9 +73,9 @@ public class FloatWindowHoverView extends LinearLayout {
         super(context);
         windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         LayoutInflater.from(context).inflate(R.layout.float_window_hover_view, this);
-        View view = findViewById(R.id.small_window_layout);
-        viewWidth = view.getLayoutParams().width;
-        viewHeight = view.getLayoutParams().height;
+        View viewHover = findViewById(R.id.hover_window_layout);
+        viewWidth = viewHover.getLayoutParams().width;
+        viewHeight = viewHover.getLayoutParams().height;
         TextView percentView = findViewById(R.id.percent);
         percentView.setText(FloatWindowManager.getUsedPercentValue(context));
     }

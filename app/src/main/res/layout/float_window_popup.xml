@@ -1,25 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/big_window_layout"
-	android:layout_width="200dip"
-	android:layout_height="100dip"
-	android:background="@drawable/bg_popup"
-	android:orientation="vertical"
-    >
-    <Button 
-        android:id="@+id/close"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_popup"
+    android:layout_width="200dip"
+    android:layout_height="300dip"
+    android:background="@drawable/bg_popup"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_popup_home"
         android:layout_width="100dip"
         android:layout_height="40dip"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="12dip"
-        android:text="关闭悬浮窗"
-        />
-    <Button 
-        android:id="@+id/back"
+        android:text="HOME" />
+
+    <Button
+        android:id="@+id/btn_popup_back"
         android:layout_width="100dip"
         android:layout_height="40dip"
         android:layout_gravity="center_horizontal"
-        android:text="返回"
-        />
+        android:layout_marginTop="12dip"
+        android:text="BACK" />
+
+    <Button
+        android:id="@+id/btn_popup_menu"
+        android:layout_width="100dip"
+        android:layout_height="40dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dip"
+        android:text="MENU" />
+
+    <Button
+        android:id="@+id/btn_popup_close_hover"
+        android:layout_width="100dip"
+        android:layout_height="40dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dip"
+        android:text="关闭悬浮窗" />
+
+    <Button
+        android:id="@+id/btn_popup_return"
+        android:layout_width="100dip"
+        android:layout_height="40dip"
+        android:layout_gravity="center_horizontal"
+        android:text="关闭返回" />
 </LinearLayout>

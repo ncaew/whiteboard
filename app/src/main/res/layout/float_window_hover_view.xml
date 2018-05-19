@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/small_window_layout"
+    android:id="@+id/hover_window_layout"
     android:layout_width="60dip"
-    android:layout_height="25dip"
+    android:layout_height="60dip"
     android:background="@drawable/bg_hover"
     >
     <TextView

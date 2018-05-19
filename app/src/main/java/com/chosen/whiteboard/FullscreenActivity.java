@@ -1,33 +1,37 @@
 package com.chosen.whiteboard;
 
 import android.annotation.SuppressLint;
-import android.app.SearchManager;
-import android.content.ContentUris;
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.CalendarContract;
-import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
 public class FullscreenActivity extends AppCompatActivity {
-    private String TAG = "Whiteboard";
+    private static String TAG = "Whiteboard";
 
+    FrameLayout flFullscreen;
     ImageView ivBtn1;
     ImageView ivBtn2;
     ImageView ivBtn3;
     ImageView ivBtn4;
     ImageView ivBtn5;
+    Config config = new Config();
+    Button btnTest;
+    AppsStarterListDialog dlg;
+
 
     private static final boolean AUTO_HIDE = false;
 
@@ -118,6 +122,7 @@ public class FullscreenActivity extends AppCompatActivity {
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 
+        flFullscreen = findViewById(R.id.frameLayout_fullscreen);
         ivBtn1 = findViewById(R.id.imageView1);
         ivBtn2 = findViewById(R.id.imageView2);
         ivBtn3 = findViewById(R.id.imageView3);
@@ -128,6 +133,29 @@ public class FullscreenActivity extends AppCompatActivity {
         ivBtn3.setOnClickListener(listenerImageViewBtnX);
         ivBtn4.setOnClickListener(listenerImageViewBtnX);
         ivBtn5.setOnClickListener(listenerImageViewBtnX);
+
+        btnTest = findViewById(R.id.button_test);
+        dlg = new AppsStarterListDialog(this);
+        dlg.setOwnerActivity(this);
+        btnTest.setVisibility(View.GONE);
+
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "button_test onClick: ");
+                //final PackageManager pm = getPackageManager(); //get a list of installed apps.
+                //List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+                //for (ApplicationInfo packageInfo : packages) {
+                //    Log.d(TAG, "Installed package :" + packageInfo.packageName);
+                //    Log.d(TAG, "Source dir : " + packageInfo.sourceDir);
+                //    Log.d(TAG, "Launch Activity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
+                //}
+                Log.d(TAG, "Apps Information here: ===================================================");
+                dlg.show();
+
+
+            }
+        });
     }
 
     @Override
@@ -141,6 +169,82 @@ public class FullscreenActivity extends AppCompatActivity {
         //
         Intent intent = new Intent(FullscreenActivity.this, FloatWindowService.class);
         startService(intent);
+        //
+        config.initialize();
+        config.load();
+        //config.save();
+        TextView textView;
+        String showName;
+        String iconPathname;
+        try {
+            iconPathname = config.getIconPathname(0);
+            if (iconPathname != null && !iconPathname.isEmpty()) {
+                BitmapDrawable d = new BitmapDrawable(iconPathname);
+                flFullscreen.setBackgroundDrawable(d);
+            }
+
+            iconPathname = config.getIconPathname(1);
+            if (iconPathname != null && !iconPathname.isEmpty()) {
+                //File imageFile = new File(iconPathname);
+                //ivBtn1.setImageURI(Uri.fromFile(imageFile));
+                BitmapDrawable d = new BitmapDrawable(iconPathname);
+                ivBtn1.setBackgroundDrawable(d);
+            }
+            showName = config.getShowName(1);
+            if (showName != null && !showName.isEmpty()) {
+                textView = findViewById(R.id.textView1);
+                textView.setText(showName);
+                Log.d(TAG, "onPostCreate: showName " + showName);
+            }
+
+            iconPathname = config.getIconPathname(2);
+            if (iconPathname != null && !iconPathname.isEmpty()) {
+                BitmapDrawable d = new BitmapDrawable(iconPathname);
+                ivBtn2.setBackgroundDrawable(d);
+            }
+            showName = config.getShowName(2);
+            if (showName != null && !showName.isEmpty()) {
+                textView = findViewById(R.id.textView2);
+                textView.setText(showName);
+            }
+
+            iconPathname = config.getIconPathname(3);
+            if (iconPathname != null && !iconPathname.isEmpty()) {
+                BitmapDrawable d = new BitmapDrawable(iconPathname);
+                ivBtn3.setBackgroundDrawable(d);
+            }
+            showName = config.getShowName(3);
+            if (showName != null && !showName.isEmpty()) {
+                textView = findViewById(R.id.textView3);
+                textView.setText(showName);
+            }
+
+            iconPathname = config.getIconPathname(4);
+            if (iconPathname != null && !iconPathname.isEmpty()) {
+                BitmapDrawable d = new BitmapDrawable(iconPathname);
+                ivBtn4.setBackgroundDrawable(d);
+            }
+            showName = config.getShowName(4);
+            if (showName != null && !showName.isEmpty()) {
+                textView = findViewById(R.id.textView4);
+                textView.setText(showName);
+            }
+
+            iconPathname = config.getIconPathname(5);
+            if (iconPathname != null && !iconPathname.isEmpty()) {
+                BitmapDrawable d = new BitmapDrawable(iconPathname);
+                ivBtn5.setBackgroundDrawable(d);
+            }
+            showName = config.getShowName(5);
+            if (showName != null && !showName.isEmpty()) {
+                textView = findViewById(R.id.textView5);
+                textView.setText(showName);
+            }
+
+        } catch (Exception e) {
+            Log.d(TAG, "FullscreenActivity onCreate: Error on doing replace image");
+            e.printStackTrace();
+        }
     }
 
     private void toggle() {
@@ -187,40 +291,59 @@ public class FullscreenActivity extends AppCompatActivity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
+    @Override
+    public void onBackPressed() {
+        Log.d(TAG, "FullscreenActivity onBackPressed: Same as HOME Key");
+        //实现Home键效果
+        //super.onBackPressed();这句话一定要注掉,不然又去调用默认的back处理方式
+        Intent intent= new Intent(Intent.ACTION_MAIN);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
+
     View.OnClickListener listenerImageViewBtnX = new View.OnClickListener() {
         @Override
         public void  onClick(View v) {
             Log.d(TAG, "listenerImageViewBtnX: ");
+            Intent intent = new Intent("android.intent.action.MAIN");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            String strClassName;
+            String strPkgName;
             if (v == ivBtn1) {
                 Log.d(TAG, "onClick: 1");
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_WEB_SEARCH);
-                intent.putExtra(SearchManager.QUERY,"搜索内容");
+                strPkgName = config.getPkgName(1);
+                strClassName = config.getClassName(1);
+                intent.setClassName(strPkgName, strClassName);
                 startActivity(intent);
             } else if ( v == ivBtn2) {
-                Log.d(TAG, "onClick: ");
-
-            }else if ( v == ivBtn3) {
-                Log.d(TAG, "onClick: ");
-                long startMillis = System.currentTimeMillis();
-                Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
-                builder.appendPath("time");
-                ContentUris.appendId(builder, startMillis);
-                Intent intent = new Intent(Intent.ACTION_VIEW).setData(builder.build());
-            }else if ( v == ivBtn4) {
-                Log.d(TAG, "onClick: ");
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(MediaStore.Images.Media.INTERNAL_CONTENT_URI.toString()));
-            }else if ( v == ivBtn5) {
-                Log.d(TAG, "onClick: ");
-                Intent intent=new Intent();
-                intent.setClassName("com.estrongs.android.pop", "com.estrongs.android.pop.app.openscreenad.NewSplashActivity");
+                Log.d(TAG, "onClick: 2");
+                strPkgName = config.getPkgName(2);
+                strClassName = config.getClassName(2);
+                intent.setClassName(strPkgName, strClassName);
                 startActivity(intent);
+            }else if ( v == ivBtn3) {
+                Log.d(TAG, "onClick: 3");
+                strPkgName = config.getPkgName(3);
+                strClassName = config.getClassName(3);
+                intent.setClassName(strPkgName, strClassName);
+                startActivity(intent);
+            }else if ( v == ivBtn4) {
+                Log.d(TAG, "onClick: 4");
+                strPkgName = config.getPkgName(4);
+                strClassName = config.getClassName(4);
+                intent.setClassName(strPkgName, strClassName);
+                startActivity(intent);
+                //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(MediaStore.Images.Media.INTERNAL_CONTENT_URI.toString()));
+            }else if ( v == ivBtn5) {
+                //Log.d(TAG, "onClick: 5");
+                //intent.setClassName("com.estrongs.android.pop", "com.estrongs.android.pop.app.openscreenad.NewSplashActivity");
+                //startActivity(intent);
+                dlg.show();
             } else {
                 Log.d(TAG, "listenerImageViewBtnX: Should never goes here!");
             }
         }
     };
-
-
 
 }

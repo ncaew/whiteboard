@@ -1,0 +1,38 @@
+[
+  {
+    "Stater0_className": "文件编码为UTF-8，格式为JSON",
+    "Stater0_showName": "文件路径和名称：/sdcard/Download/whiteboard/configure.json",
+    "Stater0_iconPath": "/sdcard/Download/whiteboard/bg.jpg",
+    "Stater0_pkgName": "全屏背景图"
+  },
+  {
+    "Stater1_showName": "白板",
+    "Stater1_iconPath": "/sdcard/Download/whiteboard/link1.png",
+    "Stater1_className": "com.android.calculator2.Calculator",
+    "Stater1_pkgName": "com.android.calculator2"
+  },
+  {
+    "Stater2_showName": "会议",
+    "Stater2_className": "com.android.calculator2.Calculator",
+    "Stater2_iconPath": "/sdcard/Download/whiteboard/link2.png",
+    "Stater2_pkgName": "com.android.calculator2"
+  },
+  {
+    "Stater3_showName": "文件",
+    "Stater3_className": "com.estrongs.android.pop.app.openscreenad.NewSplashActivity",
+    "Stater3_iconPath": "/sdcard/Download/whiteboard/link3.png",
+    "Stater3_pkgName": "com.estrongs.android.pop"
+  },
+  {
+    "Stater4_showName": "设置",
+    "Stater4_className": "com.android.settings.Settings$WirelessSettingsActivity",
+    "Stater4_iconPath": "/sdcard/Download/whiteboard/link4.png",
+    "Stater4_pkgName": "com.android.settings"
+  },
+  {
+    "Stater5_pkgName": "无需填写",
+    "Stater5_iconPath": "/sdcard/Download/whiteboard/link5.png",
+    "Stater5_className": "无需填写",
+    "Stater5_showName": "更多"
+  }
+]
