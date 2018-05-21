@@ -30,7 +30,7 @@ public class FullscreenActivity extends AppCompatActivity {
     ImageView ivBtn5;
     Config config = new Config();
     Button btnTest;
-    AppsStarterListDialog dlg;
+    StarterListDialog dlg;
 
 
     private static final boolean AUTO_HIDE = false;
@@ -135,7 +135,7 @@ public class FullscreenActivity extends AppCompatActivity {
         ivBtn5.setOnClickListener(listenerImageViewBtnX);
 
         btnTest = findViewById(R.id.button_test);
-        dlg = new AppsStarterListDialog(this);
+        dlg = new StarterListDialog(this);
         dlg.setOwnerActivity(this);
         btnTest.setVisibility(View.GONE);
 
