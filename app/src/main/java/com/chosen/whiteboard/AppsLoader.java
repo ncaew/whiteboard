@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.support.v4.content.AsyncTaskLoader;
+import android.util.Log;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -12,8 +13,9 @@ import java.util.List;
 import java.util.Comparator;
 
 public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
-    private ArrayList<AppModel> mInstalledApps;
 
+    private static String TAG = "Whiteboard";
+    private ArrayList<AppModel> mInstalledApps;
     final private PackageManager mPm;
     private PackageIntentReceiver mPackageObserver;
 
@@ -25,29 +27,22 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
 
     @Override
     public ArrayList<AppModel> loadInBackground() {
-        // retrieve the list of installed applications
         List<ApplicationInfo> apps = mPm.getInstalledApplications(0);
-
         if (apps == null) {
-            apps = new ArrayList<ApplicationInfo>();
+            apps = new ArrayList<>();
         }
-
         final Context context = getContext();
-
-        // create corresponding apps and load their labels
-        ArrayList<AppModel> items = new ArrayList<AppModel>(apps.size());
+        ArrayList<AppModel> items = new ArrayList<>(apps.size());
         for (int i = 0; i < apps.size(); i++) {
             String pkg = apps.get(i).packageName;
-
             // only apps which are launchable
             if (context.getPackageManager().getLaunchIntentForPackage(pkg) != null) {
                 AppModel app = new AppModel(context, apps.get(i));
                 app.loadLabel(context);
                 items.add(app);
+                Log.d(TAG, "launchable app: " + app.getApplicationPackageName());
             }
         }
-
-        // sort the list
         Collections.sort(items, ALPHA_COMPARATOR);
 
         return items;
@@ -62,7 +57,6 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
                 onReleaseResources(apps);
             }
         }
-
         ArrayList<AppModel> oldApps = apps;
         mInstalledApps = apps;
 

@@ -1,7 +1,6 @@
 package com.chosen.whiteboard;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -97,7 +96,7 @@ public class FloatWindowHoverView extends LinearLayout {
                 e.printStackTrace();
             }
         }
-        Log.d(TAG, "getStatusBarHeight: " + statusBarHeight);
+        //Log.d(TAG, "getStatusBarHeight: " + statusBarHeight);
         statusBarHeight = 1;
         return statusBarHeight;
     }

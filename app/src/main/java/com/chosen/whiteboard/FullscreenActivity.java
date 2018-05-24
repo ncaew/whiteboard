@@ -1,7 +1,9 @@
 package com.chosen.whiteboard;
 
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -138,7 +140,6 @@ public class FullscreenActivity extends AppCompatActivity {
         dlg = new StarterListDialog(this);
         dlg.setOwnerActivity(this);
         btnTest.setVisibility(View.GONE);
-
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,8 +153,6 @@ public class FullscreenActivity extends AppCompatActivity {
                 //}
                 Log.d(TAG, "Apps Information here: ===================================================");
                 dlg.show();
-
-
             }
         });
     }
@@ -194,7 +193,7 @@ public class FullscreenActivity extends AppCompatActivity {
             if (showName != null && !showName.isEmpty()) {
                 textView = findViewById(R.id.textView1);
                 textView.setText(showName);
-                Log.d(TAG, "onPostCreate: showName " + showName);
+                //Log.d(TAG, "onPostCreate: showName " + showName);
             }
 
             iconPathname = config.getIconPathname(2);
@@ -305,45 +304,43 @@ public class FullscreenActivity extends AppCompatActivity {
     View.OnClickListener listenerImageViewBtnX = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.d(TAG, "listenerImageViewBtnX: ");
             try {
-                Intent intent = new Intent("android.intent.action.MAIN");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                String strClassName;
-                String strPkgName;
+                int n;
+                PackageManager pm = getPackageManager();
+                Intent intent;
                 if (v == ivBtn1) {
                     Log.d(TAG, "onClick: 1");
-                    strPkgName = config.getPkgName(1);
-                    strClassName = config.getClassName(1);
-                    intent.setClassName(strPkgName, strClassName);
-                    startActivity(intent);
+                    n = 1;
                 } else if (v == ivBtn2) {
                     Log.d(TAG, "onClick: 2");
-                    strPkgName = config.getPkgName(2);
-                    strClassName = config.getClassName(2);
-                    intent.setClassName(strPkgName, strClassName);
-                    startActivity(intent);
+                    n = 2;
                 } else if (v == ivBtn3) {
                     Log.d(TAG, "onClick: 3");
-                    strPkgName = config.getPkgName(3);
-                    strClassName = config.getClassName(3);
-                    intent.setClassName(strPkgName, strClassName);
-                    startActivity(intent);
+                    n = 3;
                 } else if (v == ivBtn4) {
                     Log.d(TAG, "onClick: 4");
-                    strPkgName = config.getPkgName(4);
-                    strClassName = config.getClassName(4);
-                    intent.setClassName(strPkgName, strClassName);
-                    startActivity(intent);
-                    //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(MediaStore.Images.Media.INTERNAL_CONTENT_URI.toString()));
+                    n = 4;
                 } else if (v == ivBtn5) {
-                    //Log.d(TAG, "onClick: 5");
-                    //intent.setClassName("com.estrongs.android.pop", "com.estrongs.android.pop.app.openscreenad.NewSplashActivity");
-                    //startActivity(intent);
-                    dlg.show();
+                    n = 5;
                 } else {
+                    n = 5;
                     Log.d(TAG, "listenerImageViewBtnX: Should never goes here!");
                 }
+                if (n < 5) {
+                    String pkg = config.getPkgName(n);
+                    Log.d(TAG, "going to start package : " + pkg);
+                    intent = pm.getLaunchIntentForPackage(pkg);
+                    if (intent != null) {
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        Log.d(TAG, "going to start package : " + intent.getPackage());
+                        ComponentName ac = intent.resolveActivity(pm);
+                        Log.d(TAG, "going to start activity: " + ac.getClassName());
+                        startActivity(intent);
+                    }
+                } else {
+                    dlg.show();
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

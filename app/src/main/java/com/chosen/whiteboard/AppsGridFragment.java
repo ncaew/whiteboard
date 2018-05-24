@@ -1,7 +1,9 @@
 package com.chosen.whiteboard;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
@@ -59,9 +61,12 @@ public class AppsGridFragment extends GridFragment implements LoaderManager.Load
         AppModel app = (AppModel) getGridAdapter().getItem(position);
         Activity activity = getActivity();
         if (app != null && activity != null) {
-            Intent intent = activity.getPackageManager().getLaunchIntentForPackage(app.getApplicationPackageName());
+            PackageManager pm = activity.getPackageManager();
+            Intent intent = pm.getLaunchIntentForPackage(app.getApplicationPackageName());
             if (intent != null) {
-                Log.d(TAG, "onGridItemClick: "+intent.getPackage());
+                Log.d(TAG, "going to start package : "+intent.getPackage());
+                ComponentName ac = intent.resolveActivity(pm);
+                Log.d(TAG, "going to start activity: "+ac.getClassName());
                 startActivity(intent);
             }
         }

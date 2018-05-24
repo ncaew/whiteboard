@@ -1,38 +1,38 @@
 [
-  {
-    "starter0_className": "文件编码为UTF-8，格式为JSON",
-    "starter0_showName": "文件路径和名称：/sdcard/Download/whiteboard/configure.json",
-    "starter0_iconPath": "/sdcard/Download/whiteboard/bg.jpg",
-    "starter0_pkgName": "全屏背景图"
-  },
-  {
-    "starter1_showName": "白板",
-    "starter1_iconPath": "/sdcard/Download/whiteboard/link1.png",
-    "starter1_className": "com.android.calculator2.Calculator",
-    "starter1_pkgName": "com.android.calculator2"
-  },
-  {
-    "starter2_showName": "会议",
-    "starter2_className": "com.android.calculator2.Calculator",
-    "starter2_iconPath": "/sdcard/Download/whiteboard/link2.png",
-    "starter2_pkgName": "com.android.calculator2"
-  },
-  {
-    "starter3_showName": "文件",
-    "starter3_className": "com.estrongs.android.pop.app.openscreenad.NewSplashActivity",
-    "starter3_iconPath": "/sdcard/Download/whiteboard/link3.png",
-    "starter3_pkgName": "com.estrongs.android.pop"
-  },
-  {
-    "starter4_showName": "设置",
-    "starter4_className": "com.android.settings.Settings$WirelessSettingsActivity",
-    "starter4_iconPath": "/sdcard/Download/whiteboard/link4.png",
-    "starter4_pkgName": "com.android.settings"
-  },
-  {
-    "starter5_pkgName": "无需填写",
-    "starter5_iconPath": "/sdcard/Download/whiteboard/link5.png",
-    "starter5_className": "无需填写",
-    "starter5_showName": "更多"
-  }
+    {
+        "starter0_className": "文件编码为UTF-8，格式为JSON",
+        "starter0_showName": "文件路径和名称：/sdcard/Download/whiteboard/configure.json",
+        "starter0_iconPath": "",
+        "starter0_pkgName": "全屏背景图"
+    },
+    {
+        "starter1_showName": "白板",
+        "starter1_iconPath": "",
+        "starter1_className": "com.android.calculator2.Calculator",
+        "starter1_pkgName": "com.android.calculator2"
+    },
+    {
+        "starter2_showName": "会议",
+        "starter2_className": "com.android.calculator2.Calculator",
+        "starter2_iconPath": "",
+        "starter2_pkgName": "com.android.calendar"
+    },
+    {
+        "starter3_showName": "文件",
+        "starter3_className": "com.estrongs.android.pop.app.openscreenad.NewSplashActivity",
+        "starter3_iconPath": "",
+        "starter3_pkgName": "com.android.deskclock"
+    },
+    {
+        "starter4_showName": "设置",
+        "starter4_className": "com.android.settings.Settings$WirelessSettingsActivity",
+        "starter4_iconPath": "",
+        "starter4_pkgName": "com.android.settings"
+    },
+    {
+        "starter5_pkgName": "无需填写",
+        "starter5_iconPath": "",
+        "starter5_className": "无需填写",
+        "starter5_showName": "更多"
+    }
 ]

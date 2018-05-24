@@ -37,6 +37,8 @@ class Config {
         dirConf += "/" + confDirectory;
         fileConf = dirConf + "/" + confFilename;
         Log.d(TAG, "Config initialize: " + fileConf);
+        Log.w(TAG, "Config initialize: " + fileConf);
+        Log.e(TAG, "Config initialize: " + fileConf);
     }
 
     String getPkgName(int i) {
@@ -93,7 +95,7 @@ class Config {
         }
         try {
             JSONArray jsonArray = new JSONArray(strConf);
-            Log.d(TAG, "Config load: " + jsonArray.toString(4));
+            //Log.d(TAG, "Config load: " + jsonArray.toString(4));
             for (int i = 0; i < confItemAmount; i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 if (jsonObject.has("starter" + i + "_pkgName"))
