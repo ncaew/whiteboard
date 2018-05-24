@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_popup"
-    android:layout_width="200dip"
+    android:layout_width="240dip"
     android:layout_height="300dip"
     android:background="@drawable/bg_popup"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_popup_home"
-        android:layout_width="100dip"
-        android:layout_height="40dip"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="12dip"
-        android:text="HOME" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dip" />
 
     <Button
         android:id="@+id/btn_popup_back"
@@ -20,16 +16,29 @@
         android:layout_height="40dip"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="12dip"
-        android:text="BACK" />
-
+        android:text="@string/BACK" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dip" />
     <Button
         android:id="@+id/btn_popup_menu"
         android:layout_width="100dip"
         android:layout_height="40dip"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="12dip"
-        android:text="MENU" />
+        android:text="@string/MENU" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dip" />
+    <Button
+        android:id="@+id/btn_popup_home"
+        android:layout_width="100dip"
+        android:layout_height="40dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dip"
+        android:text="@string/HOME" />
 
+    <!--
     <Button
         android:id="@+id/btn_popup_close_hover"
         android:layout_width="100dip"
@@ -44,4 +53,5 @@
         android:layout_height="40dip"
         android:layout_gravity="center_horizontal"
         android:text="关闭返回" />
+        -->
 </LinearLayout>

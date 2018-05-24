@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 
 import java.util.ArrayList;
 
 public class AppsGridFragment extends GridFragment implements LoaderManager.LoaderCallbacks<ArrayList<AppModel>> {
-
+    private static String TAG = "Whiteboard";
     AppListAdapter mAdapter;
 
     @Override
@@ -60,6 +61,7 @@ public class AppsGridFragment extends GridFragment implements LoaderManager.Load
         if (app != null && activity != null) {
             Intent intent = activity.getPackageManager().getLaunchIntentForPackage(app.getApplicationPackageName());
             if (intent != null) {
+                Log.d(TAG, "onGridItemClick: "+intent.getPackage());
                 startActivity(intent);
             }
         }

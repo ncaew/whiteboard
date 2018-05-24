@@ -20,7 +20,6 @@ class Config {
     private String dirConf;
     private String fileConf;
 
-
     class Starter {
         String pkgName;
         String className;
@@ -97,38 +96,40 @@ class Config {
             Log.d(TAG, "Config load: " + jsonArray.toString(4));
             for (int i = 0; i < confItemAmount; i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                if (jsonObject.has("Stater" + i + "_pkgName"))
-                    listStarter.get(i).pkgName = jsonObject.getString("Stater" + i + "_pkgName");
+                if (jsonObject.has("starter" + i + "_pkgName"))
+                    listStarter.get(i).pkgName = jsonObject.getString("starter" + i + "_pkgName");
                 else
                     listStarter.get(i).pkgName = "";
-                if (jsonObject.has("Stater" + i + "_className"))
-                    listStarter.get(i).className = jsonObject.getString("Stater" + i + "_className");
+                if (jsonObject.has("starter" + i + "_className"))
+                    listStarter.get(i).className = jsonObject.getString("starter" + i + "_className");
                 else
                     listStarter.get(i).className = "";
-                if (jsonObject.has("Stater" + i + "_iconPath"))
-                    listStarter.get(i).iconPath = jsonObject.getString("Stater" + i + "_iconPath");
+                if (jsonObject.has("starter" + i + "_iconPath"))
+                    listStarter.get(i).iconPath = jsonObject.getString("starter" + i + "_iconPath");
                 else
                     listStarter.get(i).iconPath = "";
-                if (jsonObject.has("Stater" + i + "_showName"))
-                    listStarter.get(i).showName = jsonObject.getString("Stater" + i + "_showName");
+                if (jsonObject.has("starter" + i + "_showName"))
+                    listStarter.get(i).showName = jsonObject.getString("starter" + i + "_showName");
                 else
                     listStarter.get(i).showName = "";
             }
         } catch (Exception e) {
             Log.d(TAG, "Config load: Error on Json");
             e.printStackTrace();
+            save();
         }
     }
 
-    void save() {
+    private void save() {
         JSONArray jsonArray = new JSONArray();
+        Log.d(TAG, "Config save: a sample configure.json");
         try {
             for (int i = 0; i < confItemAmount; i++) {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("Stater" + i + "_pkgName", listStarter.get(i).pkgName);
-                jsonObject.put("Stater" + i + "_className", listStarter.get(i).className);
-                jsonObject.put("Stater" + i + "_iconPath", listStarter.get(i).iconPath);
-                jsonObject.put("Stater" + i + "_showName", listStarter.get(i).showName);
+                jsonObject.put("starter" + i + "_pkgName", listStarter.get(i).pkgName);
+                jsonObject.put("starter" + i + "_className", listStarter.get(i).className);
+                jsonObject.put("starter" + i + "_iconPath", listStarter.get(i).iconPath);
+                jsonObject.put("starter" + i + "_showName", listStarter.get(i).showName);
                 jsonArray.put(jsonObject);
             }
         } catch (Exception e) {

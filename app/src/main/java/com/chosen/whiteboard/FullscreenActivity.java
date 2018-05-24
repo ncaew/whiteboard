@@ -296,7 +296,7 @@ public class FullscreenActivity extends AppCompatActivity {
         Log.d(TAG, "FullscreenActivity onBackPressed: Same as HOME Key");
         //实现Home键效果
         //super.onBackPressed();这句话一定要注掉,不然又去调用默认的back处理方式
-        Intent intent= new Intent(Intent.ACTION_MAIN);
+        Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addCategory(Intent.CATEGORY_HOME);
         startActivity(intent);
@@ -304,44 +304,48 @@ public class FullscreenActivity extends AppCompatActivity {
 
     View.OnClickListener listenerImageViewBtnX = new View.OnClickListener() {
         @Override
-        public void  onClick(View v) {
+        public void onClick(View v) {
             Log.d(TAG, "listenerImageViewBtnX: ");
-            Intent intent = new Intent("android.intent.action.MAIN");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            String strClassName;
-            String strPkgName;
-            if (v == ivBtn1) {
-                Log.d(TAG, "onClick: 1");
-                strPkgName = config.getPkgName(1);
-                strClassName = config.getClassName(1);
-                intent.setClassName(strPkgName, strClassName);
-                startActivity(intent);
-            } else if ( v == ivBtn2) {
-                Log.d(TAG, "onClick: 2");
-                strPkgName = config.getPkgName(2);
-                strClassName = config.getClassName(2);
-                intent.setClassName(strPkgName, strClassName);
-                startActivity(intent);
-            }else if ( v == ivBtn3) {
-                Log.d(TAG, "onClick: 3");
-                strPkgName = config.getPkgName(3);
-                strClassName = config.getClassName(3);
-                intent.setClassName(strPkgName, strClassName);
-                startActivity(intent);
-            }else if ( v == ivBtn4) {
-                Log.d(TAG, "onClick: 4");
-                strPkgName = config.getPkgName(4);
-                strClassName = config.getClassName(4);
-                intent.setClassName(strPkgName, strClassName);
-                startActivity(intent);
-                //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(MediaStore.Images.Media.INTERNAL_CONTENT_URI.toString()));
-            }else if ( v == ivBtn5) {
-                //Log.d(TAG, "onClick: 5");
-                //intent.setClassName("com.estrongs.android.pop", "com.estrongs.android.pop.app.openscreenad.NewSplashActivity");
-                //startActivity(intent);
-                dlg.show();
-            } else {
-                Log.d(TAG, "listenerImageViewBtnX: Should never goes here!");
+            try {
+                Intent intent = new Intent("android.intent.action.MAIN");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                String strClassName;
+                String strPkgName;
+                if (v == ivBtn1) {
+                    Log.d(TAG, "onClick: 1");
+                    strPkgName = config.getPkgName(1);
+                    strClassName = config.getClassName(1);
+                    intent.setClassName(strPkgName, strClassName);
+                    startActivity(intent);
+                } else if (v == ivBtn2) {
+                    Log.d(TAG, "onClick: 2");
+                    strPkgName = config.getPkgName(2);
+                    strClassName = config.getClassName(2);
+                    intent.setClassName(strPkgName, strClassName);
+                    startActivity(intent);
+                } else if (v == ivBtn3) {
+                    Log.d(TAG, "onClick: 3");
+                    strPkgName = config.getPkgName(3);
+                    strClassName = config.getClassName(3);
+                    intent.setClassName(strPkgName, strClassName);
+                    startActivity(intent);
+                } else if (v == ivBtn4) {
+                    Log.d(TAG, "onClick: 4");
+                    strPkgName = config.getPkgName(4);
+                    strClassName = config.getClassName(4);
+                    intent.setClassName(strPkgName, strClassName);
+                    startActivity(intent);
+                    //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(MediaStore.Images.Media.INTERNAL_CONTENT_URI.toString()));
+                } else if (v == ivBtn5) {
+                    //Log.d(TAG, "onClick: 5");
+                    //intent.setClassName("com.estrongs.android.pop", "com.estrongs.android.pop.app.openscreenad.NewSplashActivity");
+                    //startActivity(intent);
+                    dlg.show();
+                } else {
+                    Log.d(TAG, "listenerImageViewBtnX: Should never goes here!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     };

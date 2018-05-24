@@ -13,61 +13,17 @@ import java.lang.reflect.Field;
 
 public class FloatWindowHoverView extends LinearLayout {
     private String TAG = "Whiteboard";
-
-    /**
-     * 记录小悬浮窗的宽度
-     */
-    public static int viewWidth;
-
-    /**
-     * 记录小悬浮窗的高度
-     */
-    public static int viewHeight;
-
-    /**
-     * 记录系统状态栏的高度
-     */
-    private static int statusBarHeight;
-
-    /**
-     * 用于更新小悬浮窗的位置
-     */
-    private WindowManager windowManager;
-
-    /**
-     * 小悬浮窗的参数
-     */
-    private WindowManager.LayoutParams mParams;
-
-    /**
-     * 记录当前手指位置在屏幕上的横坐标值
-     */
-    private float xInScreen;
-
-    /**
-     * 记录当前手指位置在屏幕上的纵坐标值
-     */
-    private float yInScreen;
-
-    /**
-     * 记录手指按下时在屏幕上的横坐标的值
-     */
-    private float xDownInScreen;
-
-    /**
-     * 记录手指按下时在屏幕上的纵坐标的值
-     */
-    private float yDownInScreen;
-
-    /**
-     * 记录手指按下时在小悬浮窗的View上的横坐标的值
-     */
-    private float xInView;
-
-    /**
-     * 记录手指按下时在小悬浮窗的View上的纵坐标的值
-     */
-    private float yInView;
+    public static int viewWidth; //记录小悬浮窗的宽度
+    public static int viewHeight; //记录小悬浮窗的高度
+    private static int statusBarHeight; //记录系统状态栏的高度
+    private WindowManager windowManager; //用于更新小悬浮窗的位置
+    private WindowManager.LayoutParams mParams; //小悬浮窗的参数
+    private float xInScreen; //记录当前手指位置在屏幕上的横坐标值
+    private float yInScreen; //记录当前手指位置在屏幕上的纵坐标值
+    private float xDownInScreen; //记录手指按下时在屏幕上的横坐标的值
+    private float yDownInScreen; //记录手指按下时在屏幕上的纵坐标的值
+    private float xInView; //记录手指按下时在小悬浮窗的View上的横坐标的值
+    private float yInView; //记录手指按下时在小悬浮窗的View上的纵坐标的值
 
     public FloatWindowHoverView(Context context) {
         super(context);
@@ -110,37 +66,25 @@ public class FloatWindowHoverView extends LinearLayout {
         return true;
     }
 
-    /**
-     * 将小悬浮窗的参数传入，用于更新小悬浮窗的位置。
-     *
-     * @param params 小悬浮窗的参数
-     */
+    //将小悬浮窗的参数传入，用于更新小悬浮窗的位置。
     public void setParams(WindowManager.LayoutParams params) {
         mParams = params;
     }
 
-    /**
-     * 更新小悬浮窗在屏幕中的位置。
-     */
+    //更新小悬浮窗在屏幕中的位置。
     private void updateViewPosition() {
         mParams.x = (int) (xInScreen - xInView);
         mParams.y = (int) (yInScreen - yInView);
         windowManager.updateViewLayout(this, mParams);
     }
 
-    /**
-     * 打开大悬浮窗，同时关闭小悬浮窗。
-     */
+    //打开大悬浮窗，同时关闭小悬浮窗。
     private void openBigWindow() {
         FloatWindowManager.createBigWindow(getContext());
         FloatWindowManager.removeSmallWindow(getContext());
     }
 
-    /**
-     * 用于获取状态栏的高度。
-     *
-     * @return 返回状态栏高度的像素值。
-     */
+    //用于获取状态栏的高度。
     private int getStatusBarHeight() {
         if (statusBarHeight == 0) {
             try {
