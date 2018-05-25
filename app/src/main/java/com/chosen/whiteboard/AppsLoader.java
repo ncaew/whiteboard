@@ -41,6 +41,7 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
                 app.loadLabel(context);
                 items.add(app);
                 Log.d(TAG, "launchable app: " + app.getApplicationPackageName());
+                Log.e(TAG, "launchable app: " + app.getApplicationPackageName());
             }
         }
         Collections.sort(items, ALPHA_COMPARATOR);

@@ -33,7 +33,8 @@ class Config {
         for (int i = 0; i < confItemAmount; i++) {
             listStarter.add(new Starter());
         }
-        dirConf = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+        //dirConf = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+        dirConf = "/sda2/opt";
         dirConf += "/" + confDirectory;
         fileConf = dirConf + "/" + confFilename;
         Log.d(TAG, "Config initialize: " + fileConf);
