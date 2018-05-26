@@ -34,20 +34,19 @@ public class FullscreenActivity extends AppCompatActivity {
     Button btnTest;
     StarterListDialog dlg;
 
-
     private static final boolean AUTO_HIDE = false;
 
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
      * user interaction before hiding the system UI.
      */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
+    private static final int AUTO_HIDE_DELAY_MILLIS = 100;
 
     /**
      * Some older devices needs a small delay between UI widget updates
      * and a change of the status and navigation bar.
      */
-    private static final int UI_ANIMATION_DELAY = 300;
+    private static final int UI_ANIMATION_DELAY = 100;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
@@ -74,9 +73,10 @@ public class FullscreenActivity extends AppCompatActivity {
             // Delayed display of UI elements
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) {
-                actionBar.show();
+                //actionBar.show();
+                actionBar.hide(); //永远也不显示
             }
-            mControlsView.setVisibility(View.VISIBLE);
+            mControlsView.setVisibility(View.GONE);
         }
     };
     private boolean mVisible;
@@ -135,6 +135,13 @@ public class FullscreenActivity extends AppCompatActivity {
         ivBtn3.setOnClickListener(listenerImageViewBtnX);
         ivBtn4.setOnClickListener(listenerImageViewBtnX);
         ivBtn5.setOnClickListener(listenerImageViewBtnX);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //actionBar.show();
+            actionBar.hide(); //永远也不显示
+        }
+        mControlsView.setVisibility(View.GONE);
 
         btnTest = findViewById(R.id.button_test);
         dlg = new StarterListDialog(this);
