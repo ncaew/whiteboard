@@ -1,6 +1,5 @@
 package com.chosen.whiteboard;
 
-import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,14 +16,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
+import java.util.Locale;
+
 public class FullscreenActivity extends AppCompatActivity {
     private static String TAG = "Whiteboard";
 
     FrameLayout flFullscreen;
+    ImageView ivWifi;
+    TextView tvTime;
     ImageView ivBtn1;
     ImageView ivBtn2;
     ImageView ivBtn3;
@@ -43,6 +43,8 @@ public class FullscreenActivity extends AppCompatActivity {
             actionBar.hide();
 
         flFullscreen = findViewById(R.id.frameLayout_fullscreen);
+        ivWifi = findViewById(R.id.imageView_wifi);
+        tvTime = findViewById(R.id.textView_time);
         ivBtn1 = findViewById(R.id.imageView1);
         ivBtn2 = findViewById(R.id.imageView2);
         ivBtn3 = findViewById(R.id.imageView3);
@@ -70,49 +72,38 @@ public class FullscreenActivity extends AppCompatActivity {
                 //    Log.d(TAG, "Launch Activity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
                 //}
                 Log.d(TAG, "Apps Information here: ===================================================");
-                dlg.show();
+                dlg.show(); 
             }
         });
 
 
-        View mContentView = findViewById(R.id.constraintLayout_center);
-
-        // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
-            }
-        });
-
-    }
-
-    private static final int UI_ANIMATION_DELAY = 10;
-    private final Handler mHideHandler = new Handler();
-    private final Runnable mHidePart2Runnable = new Runnable() {
-        @SuppressLint("InlinedApi")
-        @Override
-        public void run() {
-            View mContentView = findViewById(R.id.constraintLayout_center);
-            mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-        }
-    };
+    } //onCreate
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        View mContentView = findViewById(R.id.constraintLayout_center);
-        mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        //
+        final Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                View mContentView = findViewById(R.id.constraintLayout_center);
+                mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+                handler.postDelayed(this, 3000);
+                //Log.d(TAG, "run: setSystemUiVisibility");
+                Time t = new Time();
+                t.setToNow();
+                String strTime = String.format(Locale.GERMAN, "%02d:%02d", t.hour, t.minute);
+                tvTime.setText(strTime);
+            }
+        };
+        handler.postDelayed(runnable, 1);//每两秒执行一次runnable.
+        //handler.removeCallbacks(runnable); // 停止定时任务
         //
         Intent intent = new Intent(FullscreenActivity.this, FloatWindowService.class);
         startService(intent);
