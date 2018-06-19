@@ -1,10 +1,12 @@
 package com.chosen.whiteboard;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -37,7 +39,7 @@ public class FullscreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fullscreen);
 
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null)
+        if (actionBar != null)
             actionBar.hide();
 
         flFullscreen = findViewById(R.id.frameLayout_fullscreen);
@@ -71,16 +73,46 @@ public class FullscreenActivity extends AppCompatActivity {
                 dlg.show();
             }
         });
+
+
+        View mContentView = findViewById(R.id.constraintLayout_center);
+
+        // Set up the user interaction to manually show or hide the system UI.
+        mContentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
+            }
+        });
+
     }
+
+    private static final int UI_ANIMATION_DELAY = 10;
+    private final Handler mHideHandler = new Handler();
+    private final Runnable mHidePart2Runnable = new Runnable() {
+        @SuppressLint("InlinedApi")
+        @Override
+        public void run() {
+            View mContentView = findViewById(R.id.constraintLayout_center);
+            mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        }
+    };
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
-        //delayedHide(100);
+        View mContentView = findViewById(R.id.constraintLayout_center);
+        mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         //
         Intent intent = new Intent(FullscreenActivity.this, FloatWindowService.class);
         startService(intent);
@@ -94,16 +126,16 @@ public class FullscreenActivity extends AppCompatActivity {
         try {
             iconPathname = config.getIconPathname(0);
             if (iconPathname != null && !iconPathname.isEmpty()) {
-                BitmapDrawable d = new BitmapDrawable(iconPathname);
-                flFullscreen.setBackgroundDrawable(d);
+                BitmapDrawable d = new BitmapDrawable(getResources(), iconPathname);
+                flFullscreen.setBackground(d);
             }
 
             iconPathname = config.getIconPathname(1);
             if (iconPathname != null && !iconPathname.isEmpty()) {
                 //File imageFile = new File(iconPathname);
                 //ivBtn1.setImageURI(Uri.fromFile(imageFile));
-                BitmapDrawable d = new BitmapDrawable(iconPathname);
-                ivBtn1.setBackgroundDrawable(d);
+                BitmapDrawable d = new BitmapDrawable(getResources(), iconPathname);
+                ivBtn1.setBackground(d);
             }
             showName = config.getShowName(1);
             if (showName != null && !showName.isEmpty()) {
@@ -114,8 +146,8 @@ public class FullscreenActivity extends AppCompatActivity {
 
             iconPathname = config.getIconPathname(2);
             if (iconPathname != null && !iconPathname.isEmpty()) {
-                BitmapDrawable d = new BitmapDrawable(iconPathname);
-                ivBtn2.setBackgroundDrawable(d);
+                BitmapDrawable d = new BitmapDrawable(getResources(), iconPathname);
+                ivBtn2.setBackground(d);
             }
             showName = config.getShowName(2);
             if (showName != null && !showName.isEmpty()) {
@@ -125,8 +157,8 @@ public class FullscreenActivity extends AppCompatActivity {
 
             iconPathname = config.getIconPathname(3);
             if (iconPathname != null && !iconPathname.isEmpty()) {
-                BitmapDrawable d = new BitmapDrawable(iconPathname);
-                ivBtn3.setBackgroundDrawable(d);
+                BitmapDrawable d = new BitmapDrawable(getResources(), iconPathname);
+                ivBtn3.setBackground(d);
             }
             showName = config.getShowName(3);
             if (showName != null && !showName.isEmpty()) {
@@ -136,8 +168,8 @@ public class FullscreenActivity extends AppCompatActivity {
 
             iconPathname = config.getIconPathname(4);
             if (iconPathname != null && !iconPathname.isEmpty()) {
-                BitmapDrawable d = new BitmapDrawable(iconPathname);
-                ivBtn4.setBackgroundDrawable(d);
+                BitmapDrawable d = new BitmapDrawable(getResources(), iconPathname);
+                ivBtn4.setBackground(d);
             }
             showName = config.getShowName(4);
             if (showName != null && !showName.isEmpty()) {
@@ -147,8 +179,8 @@ public class FullscreenActivity extends AppCompatActivity {
 
             iconPathname = config.getIconPathname(5);
             if (iconPathname != null && !iconPathname.isEmpty()) {
-                BitmapDrawable d = new BitmapDrawable(iconPathname);
-                ivBtn5.setBackgroundDrawable(d);
+                BitmapDrawable d = new BitmapDrawable(getResources(), iconPathname);
+                ivBtn5.setBackground(d);
             }
             showName = config.getShowName(5);
             if (showName != null && !showName.isEmpty()) {
