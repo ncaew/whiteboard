@@ -1,2 +1,2 @@
-# whiteboard
-Android Launcher for Whiteboard scenario, Chosen.
+# cxtosLauncher
+Android Launcher for CXTOS Demo scenario, Chosen.
