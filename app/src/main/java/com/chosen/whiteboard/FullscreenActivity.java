@@ -4,8 +4,11 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.Time;
@@ -32,6 +35,54 @@ public class FullscreenActivity extends AppCompatActivity {
     Config config = new Config();
     Button btnTest;
     StarterListDialog dlg;
+    private WifiInfo wifiInfo = null;       //获得的Wifi信息
+    private WifiManager wifiManager = null; //Wifi管理器
+    private int level;                      //信号强度值
+    private Handler handlerWifi = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what) {
+                // 如果收到正确的消息就获取WifiInfo，改变图片并显示信号强度
+                case 1:
+                    ivWifi.setImageResource(R.drawable.wifi_full);
+                    //Toast.makeText(FullscreenActivity.this, "信号强度：" + level + " 信号最好", Toast.LENGTH_SHORT).show();
+                    //Log.d(TAG, "handleMessage: wifi_full " + level);
+                    break;
+                case 2:
+                    ivWifi.setImageResource(R.drawable.wifi_best);
+                    //Toast.makeText(FullscreenActivity.this, "信号强度：" + level + " 信号较好", Toast.LENGTH_SHORT).show();
+                    //Log.d(TAG, "handleMessage: wifi_best " + level);
+                    break;
+                case 3:
+                    ivWifi.setImageResource(R.drawable.wifi_better);
+                    //Toast.makeText(FullscreenActivity.this, "信号强度：" + level + " 信号一般", Toast.LENGTH_SHORT).show();
+                    //Log.d(TAG, "handleMessage: wifi_better " + level);
+                    break;
+                case 4:
+                    ivWifi.setImageResource(R.drawable.wifi_weak);
+                    //Toast.makeText(FullscreenActivity.this, "信号强度：" + level + " 信号较差", Toast.LENGTH_SHORT).show();
+                    //Log.d(TAG, "handleMessage: wifi_weak " + level);
+                    break;
+                case 5:
+                    ivWifi.setImageResource(R.drawable.wifi_bad);
+                    //Toast.makeText(FullscreenActivity.this, "信号强度：" + level + " 无信号", Toast.LENGTH_SHORT).show();
+                    //Log.d(TAG, "handleMessage: wifi_bad " + level);
+                    break;
+                case 6:
+                    ivWifi.setImageResource(R.drawable.wifi_unlink);
+                    //Toast.makeText(FullscreenActivity.this, "信号强度：" + level + " 无信号", Toast.LENGTH_SHORT).show();
+                    //Log.d(TAG, "handleMessage: wifi_unlink " + level);
+                    break;
+                default:
+                    //以防万一
+                    ivWifi.setImageResource(R.drawable.wifi_bad);
+                    //Toast.makeText(FullscreenActivity.this, "无信号", Toast.LENGTH_SHORT).show();
+                    //Log.d(TAG, "handleMessage: wifi_NOT_MATCH_ANY_KNOWN_STATUS " + level);
+            }
+            return true;
+        }
+
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +123,7 @@ public class FullscreenActivity extends AppCompatActivity {
                 //    Log.d(TAG, "Launch Activity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
                 //}
                 Log.d(TAG, "Apps Information here: ===================================================");
-                dlg.show(); 
+                dlg.show();
             }
         });
 
@@ -100,13 +151,45 @@ public class FullscreenActivity extends AppCompatActivity {
                 t.setToNow();
                 String strTime = String.format(Locale.GERMAN, "%02d:%02d", t.hour, t.minute);
                 tvTime.setText(strTime);
+                //
+                wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+                if (wifiManager != null) {
+                    wifiInfo = wifiManager.getConnectionInfo();
+                    level = wifiInfo.getRssi(); //获得信号强度值
+                    //根据获得的信号强度发送信息
+                    if (level <= 0 && level >= -50) {
+                        Message msg = new Message();
+                        msg.what = 1;
+                        handlerWifi.sendMessage(msg);
+                    } else if (level < -50 && level >= -60) {
+                        Message msg = new Message();
+                        msg.what = 2;
+                        handlerWifi.sendMessage(msg);
+                    } else if (level < -60 && level >= -70) {
+                        Message msg = new Message();
+                        msg.what = 3;
+                        handlerWifi.sendMessage(msg);
+                    } else if (level < -70 && level >= -80) {
+                        Message msg = new Message();
+                        msg.what = 4;
+                        handlerWifi.sendMessage(msg);
+                    } else if (level < -80 && level >= -100) {
+                        Message msg = new Message();
+                        msg.what = 5;
+                        handlerWifi.sendMessage(msg);
+                    } else {
+                        Message msg = new Message();
+                        msg.what = 6;
+                        handlerWifi.sendMessage(msg);
+                    }
+                }
             }
         };
         handler.postDelayed(runnable, 1);//每两秒执行一次runnable.
         //handler.removeCallbacks(runnable); // 停止定时任务
         //
-        Intent intent = new Intent(FullscreenActivity.this, FloatWindowService.class);
-        startService(intent);
+        ////Intent intent = new Intent(FullscreenActivity.this, FloatWindowService.class);
+        ////startService(intent);
         //
         config.initialize();
         config.load();
@@ -241,5 +324,6 @@ public class FullscreenActivity extends AppCompatActivity {
             }
         }
     };
+
 
 }
