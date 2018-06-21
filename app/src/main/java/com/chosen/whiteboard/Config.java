@@ -97,25 +97,99 @@ class Config {
         try {
             JSONArray jsonArray = new JSONArray(strConf);
             //Log.d(TAG, "Config load: " + jsonArray.toString(4));
-            for (int i = 0; i < confItemAmount; i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                if (jsonObject.has("starter" + i + "_pkgName"))
-                    listStarter.get(i).pkgName = jsonObject.getString("starter" + i + "_pkgName");
-                else
-                    listStarter.get(i).pkgName = "";
-                if (jsonObject.has("starter" + i + "_className"))
-                    listStarter.get(i).className = jsonObject.getString("starter" + i + "_className");
-                else
-                    listStarter.get(i).className = "";
-                if (jsonObject.has("starter" + i + "_iconPath"))
-                    listStarter.get(i).iconPath = jsonObject.getString("starter" + i + "_iconPath");
-                else
-                    listStarter.get(i).iconPath = "";
-                if (jsonObject.has("starter" + i + "_showName"))
-                    listStarter.get(i).showName = jsonObject.getString("starter" + i + "_showName");
-                else
-                    listStarter.get(i).showName = "";
-            }
+            int i;
+            JSONObject jsonObject;
+            i = 0;
+            jsonObject = jsonArray.getJSONObject(i);
+            if (jsonObject.has("starter" + i + "_pkgName"))
+                listStarter.get(i).pkgName = jsonObject.getString("starter" + i + "_pkgName");
+            else
+                listStarter.get(i).pkgName = "";
+            if (jsonObject.has("starter" + i + "_className"))
+                listStarter.get(i).className = jsonObject.getString("starter" + i + "_className");
+            else
+                listStarter.get(i).className = "";
+            if (jsonObject.has("starter" + i + "_iconPath"))
+                listStarter.get(i).iconPath = jsonObject.getString("starter" + i + "_iconPath");
+            else
+                listStarter.get(i).iconPath = "";
+            if (jsonObject.has("starter" + i + "_showName"))
+                listStarter.get(i).showName = jsonObject.getString("starter" + i + "_showName");
+            else
+                listStarter.get(i).showName = "";
+            i = 1;
+            jsonObject = jsonArray.getJSONObject(i);
+            if (jsonObject.has("starter" + i + "_pkgName"))
+                listStarter.get(i).pkgName = jsonObject.getString("starter" + i + "_pkgName");
+            else
+                listStarter.get(i).pkgName = "com.ckdz.whiteboard";
+            if (jsonObject.has("starter" + i + "_className"))
+                listStarter.get(i).className = jsonObject.getString("starter" + i + "_className");
+            else
+                listStarter.get(i).className = "com.ckdz.whiteboard";
+            if (jsonObject.has("starter" + i + "_iconPath"))
+                listStarter.get(i).iconPath = jsonObject.getString("starter" + i + "_iconPath");
+            else
+                listStarter.get(i).iconPath = "";
+            if (jsonObject.has("starter" + i + "_showName"))
+                listStarter.get(i).showName = jsonObject.getString("starter" + i + "_showName");
+            else
+                listStarter.get(i).showName = "";
+            i = 2;
+            jsonObject = jsonArray.getJSONObject(i);
+            if (jsonObject.has("starter" + i + "_pkgName"))
+                listStarter.get(i).pkgName = jsonObject.getString("starter" + i + "_pkgName");
+            else
+                listStarter.get(i).pkgName = "com.suirui.zhumu";
+            if (jsonObject.has("starter" + i + "_className"))
+                listStarter.get(i).className = jsonObject.getString("starter" + i + "_className");
+            else
+                listStarter.get(i).className = "com.suirui.zhumu";
+            if (jsonObject.has("starter" + i + "_iconPath"))
+                listStarter.get(i).iconPath = jsonObject.getString("starter" + i + "_iconPath");
+            else
+                listStarter.get(i).iconPath = "";
+            if (jsonObject.has("starter" + i + "_showName"))
+                listStarter.get(i).showName = jsonObject.getString("starter" + i + "_showName");
+            else
+                listStarter.get(i).showName = "";
+            i = 3;
+            jsonObject = jsonArray.getJSONObject(i);
+            if (jsonObject.has("starter" + i + "_pkgName"))
+                listStarter.get(i).pkgName = jsonObject.getString("starter" + i + "_pkgName");
+            else
+                listStarter.get(i).pkgName = "com.chaozhuo.filemanager";
+            if (jsonObject.has("starter" + i + "_className"))
+                listStarter.get(i).className = jsonObject.getString("starter" + i + "_className");
+            else
+                listStarter.get(i).className = "com.chaozhuo.filemanager";
+            if (jsonObject.has("starter" + i + "_iconPath"))
+                listStarter.get(i).iconPath = jsonObject.getString("starter" + i + "_iconPath");
+            else
+                listStarter.get(i).iconPath = "";
+            if (jsonObject.has("starter" + i + "_showName"))
+                listStarter.get(i).showName = jsonObject.getString("starter" + i + "_showName");
+            else
+                listStarter.get(i).showName = "";
+            i = 4;
+            jsonObject = jsonArray.getJSONObject(i);
+            if (jsonObject.has("starter" + i + "_pkgName"))
+                listStarter.get(i).pkgName = jsonObject.getString("starter" + i + "_pkgName");
+            else
+                listStarter.get(i).pkgName = "com.android.settings";
+            if (jsonObject.has("starter" + i + "_className"))
+                listStarter.get(i).className = jsonObject.getString("starter" + i + "_className");
+            else
+                listStarter.get(i).className = "com.android.settings";
+            if (jsonObject.has("starter" + i + "_iconPath"))
+                listStarter.get(i).iconPath = jsonObject.getString("starter" + i + "_iconPath");
+            else
+                listStarter.get(i).iconPath = "";
+            if (jsonObject.has("starter" + i + "_showName"))
+                listStarter.get(i).showName = jsonObject.getString("starter" + i + "_showName");
+            else
+                listStarter.get(i).showName = "";
+
         } catch (Exception e) {
             Log.d(TAG, "Config load: Error on Json");
             e.printStackTrace();
