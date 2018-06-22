@@ -19,6 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:testOnly="false"
             android:name=".FullscreenActivity"
@@ -32,7 +33,9 @@
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.MONKEY" />
+
             </intent-filter>
+
 
         </activity>
         <service android:name=".FloatWindowService">Chosen</service>

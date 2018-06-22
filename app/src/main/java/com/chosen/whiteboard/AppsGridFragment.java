@@ -15,7 +15,7 @@ import android.widget.GridView;
 import java.util.ArrayList;
 
 public class AppsGridFragment extends GridFragment implements LoaderManager.LoaderCallbacks<ArrayList<AppModel>> {
-    private static String TAG = "Whiteboard";
+    private static String TAG = "CxtosLauncher";
     AppListAdapter mAdapter;
 
     @Override

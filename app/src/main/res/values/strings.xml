@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">whiteboard</string>
+    <string name="app_name">CxtosLauncher</string>
     <item type="id" name="TAG_ID_pkgName"/>
     <item type="id" name="TAG_ID_className"/>
     <item type="id" name="INTERNAL_EMPTY_ID"/>
