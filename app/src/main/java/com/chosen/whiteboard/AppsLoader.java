@@ -14,7 +14,7 @@ import java.util.Comparator;
 
 public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
 
-    private static String TAG = "Whiteboard";
+    private static String TAG = "CxtosLauncher";
     private ArrayList<AppModel> mInstalledApps;
     final private PackageManager mPm;
     private PackageIntentReceiver mPackageObserver;

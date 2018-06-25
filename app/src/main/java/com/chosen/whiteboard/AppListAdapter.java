@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class AppListAdapter extends ArrayAdapter<AppModel> {
-    private static String TAG = "Whiteboard";
+    private static String TAG = "CxtosLauncher";
     private final LayoutInflater mInflater;
 
     AppListAdapter(Context context) {

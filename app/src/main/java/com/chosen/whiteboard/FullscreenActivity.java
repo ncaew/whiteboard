@@ -22,7 +22,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 public class FullscreenActivity extends AppCompatActivity {
-    private static String TAG = "Whiteboard";
+    private static String TAG = "CxtosLauncher";
 
     FrameLayout flFullscreen;
     ImageView ivWifi;

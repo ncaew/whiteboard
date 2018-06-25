@@ -9,7 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class StarterListDialog extends Dialog {
-    private static String TAG = "Whiteboard";
+    private static String TAG = "CxtosLauncher";
     private Context context;
     StarterListDialog(Context context) {
         super(context);

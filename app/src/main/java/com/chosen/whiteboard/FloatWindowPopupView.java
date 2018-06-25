@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class FloatWindowPopupView extends LinearLayout {
-    private static String TAG = "Whiteboard";
+    private static String TAG = "CxtosLauncher";
     public static int viewWidth; //记录大悬浮窗的宽度
     public static int viewHeight; //记录大悬浮窗的高度
 
