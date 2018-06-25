@@ -35,7 +35,8 @@ public class StarterListDialog extends Dialog {
         Log.d(TAG, "StarterListDialog onCreate: width = " + width + " height = " + height);
         Window window = getWindow();
         if (window != null)
-            window.setLayout(width / 10 * 9, height / 10 * 8);
+            window.setLayout(width / 10 * 9, height / 10 * 9);
+            //window.setLayout(width , height);
     }
 
 }

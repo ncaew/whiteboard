@@ -2,18 +2,18 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:background="@mipmap/bg">
 
     <fragment
         android:id="@+id/apps_grid"
         android:name="com.chosen.whiteboard.AppsGridFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:minHeight="@android:dimen/dialog_min_width_minor"
-        android:minWidth="@android:dimen/dialog_min_width_minor"
-        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+        android:minHeight="@android:dimen/dialog_min_width_minor"
+        android:minWidth="@android:dimen/dialog_min_width_minor" />
 
 </android.support.constraint.ConstraintLayout>
