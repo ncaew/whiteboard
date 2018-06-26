@@ -6,7 +6,7 @@ android {
         applicationId "com.chosen.whiteboard"
         minSdkVersion 22
         targetSdkVersion 22
-        versionCode 8
+        versionCode 9
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "${applicationId}-$versionName-$versionCode")

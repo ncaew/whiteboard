@@ -213,8 +213,8 @@ public class FullscreenActivity extends AppCompatActivity {
             }
             showName = config.getShowName(1);
             if (showName != null && !showName.isEmpty()) {
-                textView = findViewById(R.id.textView1);
-                textView.setText(showName);
+                //textView = findViewById(R.id.textView1);
+                //textView.setText(showName);
                 //Log.d(TAG, "onPostCreate: showName " + showName);
             }
 
@@ -225,8 +225,8 @@ public class FullscreenActivity extends AppCompatActivity {
             }
             showName = config.getShowName(2);
             if (showName != null && !showName.isEmpty()) {
-                textView = findViewById(R.id.textView2);
-                textView.setText(showName);
+                //textView = findViewById(R.id.textView2);
+                //textView.setText(showName);
             }
 
             iconPathname = config.getIconPathname(3);
@@ -236,8 +236,8 @@ public class FullscreenActivity extends AppCompatActivity {
             }
             showName = config.getShowName(3);
             if (showName != null && !showName.isEmpty()) {
-                textView = findViewById(R.id.textView3);
-                textView.setText(showName);
+                //textView = findViewById(R.id.textView3);
+                //textView.setText(showName);
             }
 
             iconPathname = config.getIconPathname(4);
@@ -247,8 +247,8 @@ public class FullscreenActivity extends AppCompatActivity {
             }
             showName = config.getShowName(4);
             if (showName != null && !showName.isEmpty()) {
-                textView = findViewById(R.id.textView4);
-                textView.setText(showName);
+                //textView = findViewById(R.id.textView4);
+                //textView.setText(showName);
             }
 
             iconPathname = config.getIconPathname(5);
@@ -258,8 +258,8 @@ public class FullscreenActivity extends AppCompatActivity {
             }
             showName = config.getShowName(5);
             if (showName != null && !showName.isEmpty()) {
-                textView = findViewById(R.id.textView5);
-                textView.setText(showName);
+                //textView = findViewById(R.id.textView5);
+                //textView.setText(showName);
             }
 
         } catch (Exception e) {
