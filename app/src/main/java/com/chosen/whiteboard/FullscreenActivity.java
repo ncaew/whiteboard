@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -69,13 +71,13 @@ public class FullscreenActivity extends AppCompatActivity {
                     //Log.d(TAG, "handleMessage: wifi_bad " + level);
                     break;
                 case 6:
-                    ivWifi.setImageResource(R.drawable.wifi_unlink);
+                    ivWifi.setImageResource(R.drawable.wifi_full); // wifi_unlink
                     //Toast.makeText(FullscreenActivity.this, "信号强度：" + level + " 无信号", Toast.LENGTH_SHORT).show();
                     //Log.d(TAG, "handleMessage: wifi_unlink " + level);
                     break;
                 default:
                     //以防万一
-                    ivWifi.setImageResource(R.drawable.wifi_bad);
+                    ivWifi.setImageResource(R.drawable.lan_link); // wifi_bad
                     //Toast.makeText(FullscreenActivity.this, "无信号", Toast.LENGTH_SHORT).show();
                     //Log.d(TAG, "handleMessage: wifi_NOT_MATCH_ANY_KNOWN_STATUS " + level);
             }
@@ -87,6 +89,10 @@ public class FullscreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_fullscreen);
 
         ActionBar actionBar = getSupportActionBar();
