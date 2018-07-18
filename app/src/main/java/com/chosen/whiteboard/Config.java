@@ -81,8 +81,10 @@ class Config {
         listStarter.get(i).iconPath = "";
         listStarter.get(i).showName = "";
         i = 1;
-        listStarter.get(i).pkgName = "com.ckdz.whiteboard";
-        listStarter.get(i).className = "com.ckdz.whiteboard";
+        listStarter.get(i).pkgName = "com.sct.educationpad";
+        listStarter.get(i).className = "com.sct.educationpad";
+        //listStarter.get(i).pkgName = "com.ckdz.whiteboard";
+        //listStarter.get(i).className = "com.ckdz.whiteboard";
         listStarter.get(i).iconPath = "";
         listStarter.get(i).showName = "";
         i = 2;
@@ -91,8 +93,10 @@ class Config {
         listStarter.get(i).iconPath = "";
         listStarter.get(i).showName = "";
         i = 3;
-        listStarter.get(i).pkgName = "com.chaozhuo.filemanager";
-        listStarter.get(i).className = "com.chaozhuo.filemanager";
+        listStarter.get(i).pkgName = "com.android.documentsui";
+        listStarter.get(i).className = "com.android.documentsui";
+        //listStarter.get(i).pkgName = "com.chaozhuo.filemanager";
+        //listStarter.get(i).className = "com.chaozhuo.filemanager";
         listStarter.get(i).iconPath = "";
         listStarter.get(i).showName = "";
         i = 4;
