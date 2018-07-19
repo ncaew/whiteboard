@@ -1,11 +1,12 @@
 package com.chosen.whiteboard;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -37,6 +38,7 @@ public class FullscreenActivity extends AppCompatActivity {
     Config config = new Config();
     Button btnTest;
     StarterListDialog dlg;
+    /*
     private WifiInfo wifiInfo = null;       //获得的Wifi信息
     private WifiManager wifiManager = null; //Wifi管理器
     private int level;                      //信号强度值
@@ -83,7 +85,32 @@ public class FullscreenActivity extends AppCompatActivity {
             }
             return true;
         }
+    });
+    */
 
+    private Handler handlerNetworkConnection = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what) {
+                // 如果收到正确的消息就获取handlerNetworkConnection，改变图片
+                case 0:
+                    ivWifi.setImageResource(R.drawable.lan_unlink);
+                    //Toast.makeText(FullscreenActivity.this, "信号强度：" + level + " 信号最好", Toast.LENGTH_SHORT).show();
+                    //Log.d(TAG, "handleMessage: wifi_full " + level);
+                    break;
+                case 1:
+                    ivWifi.setImageResource(R.drawable.lan_link);
+                    //Toast.makeText(FullscreenActivity.this, "信号强度：" + level + " 信号较好", Toast.LENGTH_SHORT).show();
+                    //Log.d(TAG, "handleMessage: wifi_best " + level);
+                    break;
+                default:
+                    //以防万一
+                    ivWifi.setImageResource(R.drawable.lan_unlink); // wifi_bad
+                    //Toast.makeText(FullscreenActivity.this, "无信号", Toast.LENGTH_SHORT).show();
+                    //Log.d(TAG, "handleMessage: wifi_NOT_MATCH_ANY_KNOWN_STATUS " + level);
+            }
+            return true;
+        }
     });
 
     @Override
@@ -93,11 +120,11 @@ public class FullscreenActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_fullscreen);
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null)
             actionBar.hide();
+
+        setContentView(R.layout.activity_fullscreen);
 
         flFullscreen = findViewById(R.id.frameLayout_fullscreen);
         ivWifi = findViewById(R.id.imageView_wifi);
@@ -157,7 +184,28 @@ public class FullscreenActivity extends AppCompatActivity {
                 t.setToNow();
                 String strTime = String.format(Locale.GERMAN, "%02d:%02d", t.hour, t.minute);
                 tvTime.setText(strTime);
-                //
+                //有线网络连接状态直接改变
+                ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (manager != null) {
+                    NetworkInfo mNetworkInfo = manager.getActiveNetworkInfo();
+                    if (mNetworkInfo != null && mNetworkInfo.isConnected()) {
+                        //Log.d(TAG, "Network is active.");
+                        Message msg = new Message();
+                        msg.what = 1;
+                        handlerNetworkConnection.sendMessage(msg);
+                    } else {
+                        //Log.d(TAG, "Network is not active.");
+                        Message msg = new Message();
+                        msg.what = 0;
+                        handlerNetworkConnection.sendMessage(msg);
+                    }
+                } else {
+                    Log.e(TAG, "getActiveNetworkInfo Error! ");
+                    Message msg = new Message();
+                    msg.what = 0;
+                    handlerNetworkConnection.sendMessage(msg);
+                }
+                /*
                 wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
                 if (wifiManager != null) {
                     wifiInfo = wifiManager.getConnectionInfo();
@@ -189,6 +237,7 @@ public class FullscreenActivity extends AppCompatActivity {
                         handlerWifi.sendMessage(msg);
                     }
                 }
+                */
             }
         };
         handler.postDelayed(runnable, 1);//每两秒执行一次runnable.

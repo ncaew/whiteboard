@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.Black.NoTitleBar">
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 
         <activity
             android:testOnly="false"
@@ -35,7 +35,6 @@
                 <category android:name="android.intent.category.MONKEY" />
 
             </intent-filter>
-
 
         </activity>
         <service android:name=".FloatWindowService">Chosen</service>
